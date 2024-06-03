@@ -1,0 +1,13 @@
+version: v1
+
+components:
+  - name: equipment-integration-guide
+    docker:
+      file: Dockerfile
+    resources:
+      cpu: 256m
+      memory: 1Gi
+    ingresses:
+      - host: app
+    ports:
+      - 8501
