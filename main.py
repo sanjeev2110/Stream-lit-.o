@@ -2,7 +2,7 @@ import streamlit as st
 import json
 
 # Load questions and rules from JSON file
-with open('rules.json') as json_file:
+with open('rules-next.json') as json_file:
     data = json.load(json_file)
     questions = data['questions']
     recommendations = data['recommendations']
@@ -31,6 +31,9 @@ while current_question_key:
     question = questions[current_question_key]
     answer = st.radio(question['question'], question['options'], index=None)
     user_answers[current_question_key] = answer
+   # Show description if the answer is IIoT Edge Platform, IIoT Edge Platform - Edge Device Hardware Installation, or Central Aggregation Server
+    if answer in question.get("descriptions", {}):
+        st.markdown(question["descriptions"][answer], unsafe_allow_html=True)
 
     # Determine the next question
     if question['next']:
